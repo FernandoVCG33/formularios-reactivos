@@ -1,7 +1,7 @@
 import {Routes} from '@angular/router';
 import {RegisterPage} from '../shared/components/register-page/register-page';
 
-export const authRoutes:Routes = [
+export  const authRoutes:Routes = [
   {
     path:'',
     children:[
@@ -16,3 +16,4 @@ export const authRoutes:Routes = [
     ]
   }
 ];
+export default authRoutes;

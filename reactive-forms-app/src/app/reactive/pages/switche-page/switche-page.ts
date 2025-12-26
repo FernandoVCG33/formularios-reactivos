@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import {JsonPipe} from '@angular/common';
 
 @Component({
   selector: 'app-switche-page',
-  imports: [],
+  imports: [
+    JsonPipe
+  ],
   templateUrl: './switche-page.html',
-  styleUrl: './switche-page.css',
 })
 export class SwitchePage {
 

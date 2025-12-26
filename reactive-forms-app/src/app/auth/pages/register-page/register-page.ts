@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import {JsonPipe} from '@angular/common';
 
 @Component({
-  selector: 'app-dynamic-page',
+  selector: 'app-register-page',
   imports: [
     JsonPipe
   ],
-  templateUrl: './dynamic-page.html',
+  templateUrl: './register-page.html',
 })
-export class DynamicPage {
+export class RegisterPage {
 
 }
