@@ -1,1 +1,24 @@
-<p>side-menu works!</p>
+<h2>
+  Paginas
+</h2>
+
+<h3>Reactive</h3>
+<ul class="list-group">
+  @for (item of reactibeMenu; track item.title){
+    <li class="list-group-item" [routerLink]="item.route" routerLinkActive="active"   >{{item.title}}</li>
+  }
+</ul>
+
+<h3>Auth</h3>
+<ul class="list-group">
+  @for (item of authMenu; track item.title){
+    <li class="list-group-item" [routerLink]="item.route" routerLinkActive="active"   >{{item.title}}</li>
+  }
+</ul>
+
+<h3>Paises</h3>
+<ul class="list-group">
+  @for (item of country; track item.title){
+    <li class="list-group-item" [routerLink]="item.route" routerLinkActive="active"   >{{item.title}}</li>
+  }
+</ul>
