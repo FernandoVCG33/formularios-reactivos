@@ -53,11 +53,13 @@
             />
 
             <button class="btn btn-outline-danger"
-                    type="button">
+                    type="button"
+                    (click)="onDelete(i)"
+            >
               Eliminar
             </button>
           </div>
-          @if (formUtils.isValidFieldArray(favoriteGames,i)){
+          @if (formUtils.isValidFieldInArray(favoriteGames,i)){
               <span class="form-text text-danger">
                   {{formUtils.getFieldErrorInArray(favoriteGames, i)}}
 
@@ -67,9 +69,12 @@
         </div>
 
       }
-
+      @if (formUtils.isValidField(myForm,'favoriteGames')) {
+        <span class="form-text text-danger">
+                  debes tener mas de 2 juegos
+        </span>
+      }
     </div>
-
   </div>
 
 
@@ -78,8 +83,9 @@
     <div class="col-sm-12">
       <button type="submit"
               class="btn btn-primary float-end"
+              [disabled]="myForm.invalid"
       >
-        <!-- [disabled]="myForm.invalid" -->
+
         Guardar
       </button>
     </div>

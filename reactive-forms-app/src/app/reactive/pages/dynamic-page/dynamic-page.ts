@@ -35,5 +35,11 @@ export class DynamicPage {
    onaddToFavorites() {
         if(this.newFavorite.invalid) return;
         const newGame=this.newFavorite.value;
+        this.favoriteGames.push(this.fb.control(newGame,Validators.required));
+        this.newFavorite.reset();
+  }
+
+  onDelete(i: number) {
+     this.favoriteGames.removeAt(i);
   }
 }
