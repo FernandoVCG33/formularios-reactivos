@@ -11,7 +11,7 @@ export class CountryService {
   private baseUrl='https://restcountries.com/v3.1/';
   private http=inject(HttpClient);
 
-  private _regions=[
+  regions=[
     'Africa',
     'Americas',
     'Asia',
@@ -19,7 +19,7 @@ export class CountryService {
     'Oceania'
   ];
   getRegions():string[]{
-    return [...this._regions];
+    return [...this.regions];
   }
   getCountriesByRegion(region:string): Observable<Country[]>{
     if(!region) return of([]);
