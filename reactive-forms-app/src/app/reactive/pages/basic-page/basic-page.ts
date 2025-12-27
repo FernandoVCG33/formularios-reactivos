@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { JsonPipe } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {FormUtils} from '../../../utils/form-utils';
 
 @Component({
   selector: 'app-basic-page',
@@ -15,6 +16,7 @@ export class BasicPage {
 
   private fb = inject(FormBuilder);
 
+  formUtils= FormUtils;
   public myForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     price: [0, [Validators.required, Validators.min(10)]],
@@ -60,6 +62,10 @@ export class BasicPage {
       this.myForm.markAllAsTouched();
       return;
     }
-
+    this.myForm.reset({
+      price: 100,
+      inStorage: 50,
+      name: 'Sin nombre'
+    })
   }
 }
