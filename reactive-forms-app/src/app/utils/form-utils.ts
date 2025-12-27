@@ -57,6 +57,8 @@ export class FormUtils {
         case 'email':
           return 'El formato del email no es válido.';
         // Puedes añadir más casos de validación aquí
+        default:
+          return 'Campo inválido';
       }
     }
     return null;
