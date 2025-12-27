@@ -1,8 +1,9 @@
-import {Component, inject, signal} from '@angular/core';
+import {Component, effect, inject, signal} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {JsonPipe} from '@angular/common';
 import {CountryService} from '../../services/country.service';
 import {Country} from '../../interfaces/country.interface';
+import {switchMap, tap} from 'rxjs';
 
 @Component({
   selector: 'app-country-page',
@@ -21,4 +22,35 @@ export class CountryPage {
       country: ['',Validators.required],
       border: ['',Validators.required],
     });
+
+    onformChabged=effect(
+      (onCleanup)=>{
+        const regionSusbcription=this.onregionChanged();
+        onCleanup(()=>{
+          regionSusbcription.unsubscribe();
+        });
+      });
+    onregionChanged(){
+      return this.myForm.get('region')!.valueChanges
+        .pipe(
+          tap(() => this.myForm.get('country')!.setValue('')),
+          tap(() => this.myForm.get('border')!.setValue('')),
+          tap(() => {
+            this.borders.set([]);
+            this.countryByRegion.set([]);
+          }),
+          switchMap(
+            region => this.countryService.getCountriesByRegion(region ?? ''))
+        )
+        .subscribe((countries) => {
+          console.log({countries});
+          this.countryByRegion.set(countries);
+        }
+      )
+    }
+
+    onCountruChange(){
+      return this.myForm.get('country')!.setValue('');
+    }
+
 }
