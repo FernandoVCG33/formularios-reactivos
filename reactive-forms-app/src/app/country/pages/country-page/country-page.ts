@@ -3,7 +3,7 @@ import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {JsonPipe} from '@angular/common';
 import {CountryService} from '../../services/country.service';
 import {Country} from '../../interfaces/country.interface';
-import {switchMap, tap} from 'rxjs';
+import {filter, switchMap, tap} from 'rxjs';
 
 @Component({
   selector: 'app-country-page',
@@ -26,6 +26,7 @@ export class CountryPage {
     onformChabged=effect(
       (onCleanup)=>{
         const regionSusbcription=this.onregionChanged();
+        const countrySubscription=this.onCountruChange();
         onCleanup(()=>{
           regionSusbcription.unsubscribe();
         });
@@ -50,7 +51,16 @@ export class CountryPage {
     }
 
     onCountruChange(){
-      return this.myForm.get('country')!.setValue('');
+      return this.myForm.get('country')!.valueChanges
+        .pipe(
+          tap( () => this.myForm.get('border')!.setValue('') ),
+          filter( value => value!.length > 0    ),
+          switchMap(alphaCode => this.countryService.getCountryByAlphaCode(alphaCode ?? '')),
+          switchMap( country => this.countryService.getCountriesBorderBycodeByArray( country?.borders ?? [] )  )
+        )
+        .subscribe((borders) =>{
+          console.log({borders});
+        });
     }
 
 }
