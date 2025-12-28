@@ -60,6 +60,7 @@ export class CountryPage {
         )
         .subscribe((borders) =>{
           console.log({borders});
+          this.borders.set(borders);
         });
     }
 
