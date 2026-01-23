@@ -3,4 +3,6 @@ El siguiente repositorio almacenará lo que son los formularios reactivos utiliz
 ## Objetivo
 Apreder sobre el uso de los formularios reactivos en Angular
 ## Tecnologias usadas
+las teconologias usadas fueron
 ## Estructura
+
